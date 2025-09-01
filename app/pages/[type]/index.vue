@@ -1,30 +1,33 @@
 <script setup lang="ts">
-const route = useRoute();
-const type = route.params.type as string;
+const route = useRoute()
+const type = route.params.type as string
 
-const movieStore = useMovieStore();
-const tvStore = useTvStore();
+const movieStore = useMovieStore()
+const tvStore = useTvStore()
 
-const isLoading = ref(true);
-const items = ref<MediaItem[]>([]);
+const isLoading = ref(true)
+const items = ref<MediaItem[]>([])
 
 async function initialize() {
   try {
-    if (type === "movies") {
-      await movieStore.fetchMovies();
-      items.value = movieStore.movies;
-    } else if (type === "series") {
-      await tvStore.fetchTvs();
-      items.value = tvStore.tvs;
+    if (type === 'movies') {
+      await movieStore.fetchMovies()
+      items.value = movieStore.movies
     }
-  } catch (error) {
-    console.error("Failed to fetch:", error);
-  } finally {
-    isLoading.value = false;
+    else if (type === 'series') {
+      await tvStore.fetchTvs()
+      items.value = tvStore.tvs
+    }
+  }
+  catch (error) {
+    console.error('Failed to fetch:', error)
+  }
+  finally {
+    isLoading.value = false
   }
 }
 
-initialize();
+initialize()
 </script>
 
 <template>
@@ -38,7 +41,9 @@ initialize();
     </div>
 
     <div v-else>
-      <h1 class="text-2xl font-bold mb-2 capitalize">{{ type }}</h1>
+      <h1 class="text-2xl font-bold mb-2 capitalize">
+        {{ type }}
+      </h1>
       <div class="grid grid-cols-10 gap-4 overflow-auto">
         <div v-for="item in items" :key="item.id">
           <NuxtLink
@@ -48,7 +53,7 @@ initialize();
               :src="`https://image.tmdb.org/t/p/original${item.poster_path}`"
               :alt="item.title"
               class="h-48 w-96 object-contain"
-            />
+            >
           </NuxtLink>
 
           <div class="text-center text-sm">

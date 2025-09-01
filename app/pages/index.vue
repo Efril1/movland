@@ -1,7 +1,4 @@
 <script setup lang="ts">
-const route = useRoute()
-const type = route.params.type as string
-
 const movieStore = useMovieStore()
 const tvStore = useTvStore()
 
