@@ -30,7 +30,7 @@ const { data: items, pending } = await useAsyncData(
   </div>
 
   <div v-else class="overflow-auto p-3">
-    <h1 class="text-2xl font-bold mb-7 capitalize text-lightpink pl-2">
+    <h1 class="text-2xl font-bold mb-5 mt-2 capitalize text-lightpink pl-2">
       <div v-if="type === 'tv'">
         tv series
       </div>

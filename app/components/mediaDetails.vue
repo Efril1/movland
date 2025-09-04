@@ -9,7 +9,7 @@ const props = defineProps<{
 <template>
   <div class="flex gap-11 pt-20 pb-20 bg-cover bg-no-repeat bg-center" :style="{ backgroundImage: `url(${bgImage})` }">
     <img
-      :src="props.media?.poster_path ? `https://image.tmdb.org/t/p/original${props.media.poster_path}` : '/fallback.png'"
+      :src="`https://image.tmdb.org/t/p/original${props.media.poster_path}`"
       class="flex rounded-lg w-1/5 h-1/5 object-cover pl-3"
     >
     <div class="flex-col max-w-2xl space-y-6">
