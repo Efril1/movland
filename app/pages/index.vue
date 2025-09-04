@@ -1,30 +1,16 @@
 <script setup lang="ts">
-const movieStore = useMovieStore()
-const tvStore = useTvStore()
+const mediaStore = useMediaStore()
 
-const isLoading = ref(true)
-const Mitems = ref<MediaItem[]>([])
-const Titems = ref<MediaItem[]>([])
-
-async function initialize() {
-  try {
-    await movieStore.fetchMovies()
-    Mitems.value = movieStore.movies
-    await tvStore.fetchTvs()
-    Titems.value = tvStore.tvs
-  }
-  catch (error) {
-    console.error('Failed to fetch:', error)
-  }
-  finally {
-    isLoading.value = false
-  }
-}
-initialize()
+const { pending } = await useAsyncData('fetchmedia', () => {
+  return Promise.all([
+    mediaStore.fetchMedia('tv'),
+    mediaStore.fetchMedia('movie'),
+  ])
+})
 </script>
 
 <template>
-  <div v-if="isLoading" class="text-center font-bold">
+  <div v-if="pending" class="text-center font-bold">
     <div
       class="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-primary rounded-full"
       role="status"
@@ -37,9 +23,9 @@ initialize()
       Movies
     </h1>
     <div class="grid grid-cols-10 gap-4 overflow-auto">
-      <div v-for="mitem in Mitems" :key="mitem.id">
+      <div v-for="mitem in mediaStore.movies" :key="mitem.id">
         <NuxtLink
-          :to="{ name: 'itemid', params: { type: 'series', id: mitem.id } }"
+          :to="{ name: 'itemid', params: { type: 'movie', id: mitem.id } }"
         >
           <img
             :src="`https://image.tmdb.org/t/p/original${mitem.poster_path}`"
@@ -58,9 +44,9 @@ initialize()
       Series
     </h1>
     <div class="grid grid-cols-10 gap-4 overflow-auto">
-      <div v-for="titem in Titems" :key="titem.id">
+      <div v-for="titem in mediaStore.tvs" :key="titem.id">
         <NuxtLink
-          :to="{ name: 'itemid', params: { type: 'series', id: titem.id } }"
+          :to="{ name: 'itemid', params: { type: 'tv', id: titem.id } }"
         >
           <img
             :src="`https://image.tmdb.org/t/p/original${titem.poster_path}`"

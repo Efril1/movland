@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
+
+@theme {
+    --color-darkpurple: #201f31;
+    --color-lightpink: #ffbade;
+    --color-darkpink: #d39bbc;
+  }

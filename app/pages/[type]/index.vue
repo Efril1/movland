@@ -1,38 +1,28 @@
 <script setup lang="ts">
 const route = useRoute()
-const type = route.params.type as string
 
-const movieStore = useMovieStore()
-const tvStore = useTvStore()
+const mediaStore = useMediaStore()
 
-const isLoading = ref(true)
-const items = ref<MediaItem[]>([])
+const type = computed(() => {
+  const param = route.params.type as string
+  return param === 'movies' ? 'movie' : 'tv'
+})
 
-async function initialize() {
-  try {
-    if (type === 'movies') {
-      await movieStore.fetchMovies()
-      items.value = movieStore.movies
-    }
-    else if (type === 'series') {
-      await tvStore.fetchTvs()
-      items.value = tvStore.tvs
-    }
-  }
-  catch (error) {
-    console.error('Failed to fetch:', error)
-  }
-  finally {
-    isLoading.value = false
-  }
-}
-
-initialize()
+const { data: items, pending } = await useAsyncData(
+  `medialist-${type.value}`,
+  async () => {
+    await mediaStore.fetchMedia(type.value)
+    return type.value === 'movie' ? mediaStore.movies : mediaStore.tvs
+  },
+  {
+    watch: [type],
+  },
+)
 </script>
 
 <template>
   <div>
-    <div v-if="isLoading" class="text-center font-bold">
+    <div v-if="pending" class="text-center font-bold">
       <div
         class="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-primary rounded-full"
         role="status"
