@@ -13,7 +13,7 @@ const props = defineProps<Props>()
   <div class="flex flex-col items-center">
     <NuxtLink :to="{ name: 'itemid', params: { type: props.type, id: props.media.id } }">
       <img
-        :src="`https://image.tmdb.org/t/p/original${props.media.poster_path}`"
+        :src="props.media?.poster_path ? `https://image.tmdb.org/t/p/original${props.media.poster_path}` : '/fallback.png'"
         :alt="props.media.title"
         class="h-[350px] w-[480px] object-contain rounded-lg"
       >
