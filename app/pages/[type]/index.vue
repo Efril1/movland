@@ -29,9 +29,14 @@ const { data: items, pending } = await useAsyncData(
     />
   </div>
 
-  <div v-else class="overflow-auto">
-    <h1 class="text-2xl font-bold mb-2 capitalize">
-      {{ type }}
+  <div v-else class="overflow-auto p-3">
+    <h1 class="text-2xl font-bold mb-7 capitalize text-lightpink pl-2">
+      <div v-if="type === 'tv'">
+        tv series
+      </div>
+      <div v-else>
+        {{ type }}
+      </div>
     </h1>
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
       <MediaCard
