@@ -21,36 +21,25 @@ const { data: items, pending } = await useAsyncData(
 </script>
 
 <template>
-  <div>
-    <div v-if="pending" class="text-center font-bold">
-      <div
-        class="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-primary rounded-full"
-        role="status"
-        aria-label="loading"
+  <div v-if="pending" class="text-center font-bold">
+    <div
+      class="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-primary rounded-full"
+      role="status"
+      aria-label="loading"
+    />
+  </div>
+
+  <div v-else class="overflow-auto">
+    <h1 class="text-2xl font-bold mb-2 capitalize">
+      {{ type }}
+    </h1>
+    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+      <MediaCard
+        v-for="item in items"
+        :key="item.id"
+        :media="item"
+        :type="type"
       />
-    </div>
-
-    <div v-else>
-      <h1 class="text-2xl font-bold mb-2 capitalize">
-        {{ type }}
-      </h1>
-      <div class="grid grid-cols-10 gap-4 overflow-auto">
-        <div v-for="item in items" :key="item.id">
-          <NuxtLink
-            :to="{ name: 'itemid', params: { type: 'series', id: item.id } }"
-          >
-            <img
-              :src="`https://image.tmdb.org/t/p/original${item.poster_path}`"
-              :alt="item.title"
-              class="h-48 w-96 object-contain"
-            >
-          </NuxtLink>
-
-          <div class="text-center text-sm">
-            {{ item.title }}
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
   <div class="fixed left-0 top-0 w-screen h-screen flex flex-col">
-    <header class="flex justify-between items-center p-3 bg-darkpurple">
+    <header class="flex justify-between items-center p-3 bg-darkpurple/60 backdrop-blur-md transition-colors duration-300">
       <div class="flex items-center gap-6">
         <ULink
           to="/"
