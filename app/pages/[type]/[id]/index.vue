@@ -23,10 +23,10 @@ const { pending } = await useAsyncData('fetchmediabyid', () => {
   <div v-else class="overflow-auto">
     <div class="relative w-screen h-145 overflow-hidden">
       <div class="flex flex-row h-full">
-        <div class="w-[30%] bg-black h-full" />
-        <img :src="`https://image.tmdb.org/t/p/original${mediaDetailsStore.selectedMedia.backdrop_path}`" class="w-full h-full object-fit">
+        <div class="w-[40%] bg-black h-full" />
+        <img :src="`https://image.tmdb.org/t/p/original${mediaDetailsStore.selectedMedia.backdrop_path}`" class="w-full h-full object-cover">
       </div>
-      <div class="absolute inset-0 bg-gradient-to-r from-black from-30% to-transparent" />
+      <div class="absolute inset-0 bg-gradient-to-r from-black from-40% to-transparent" />
       <div class="absolute inset-0 flex items-center p-8">
         <div>
           <div class="w-4/5 text-white">
