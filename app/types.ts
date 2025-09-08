@@ -128,4 +128,5 @@ declare global {
   export interface Credits {
     cast: Media[]
   }
+
 }

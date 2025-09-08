@@ -13,7 +13,7 @@ export const useMediaStore = defineStore('mediaDiscover', () => {
     if (data.value?.results) {
       const normalized = data.value.results.map(item => ({
         ...item,
-        title: item.title || item.name,
+        media_type: mediaType,
       }))
 
       if (mediaType === 'movie') {

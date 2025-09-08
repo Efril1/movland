@@ -1,25 +1,29 @@
 <script setup lang="ts">
-import { NuxtLink } from '#components'
-
 interface Props {
   media: Media
-  type: MediaType
 }
 
 const props = defineProps<Props>()
+
+const type = ref<MediaType>()
+onMounted(() => {
+  type.value = props.media.title ? 'movie' : 'tv'
+})
 </script>
 
 <template>
-  <div class="flex flex-col items-center">
-    <NuxtLink :to="{ name: 'itemid', params: { type: props.type, id: props.media.id } }">
+  <div class="flex flex-col items-center bg-transparent rounded-lg overflow-hidden">
+    <NuxtLink :to="{ name: 'itemid', params: { type: props.media.media_type, id: props.media.id } }">
       <img
         :src="props.media?.poster_path ? `https://image.tmdb.org/t/p/original${props.media.poster_path}` : '/fallback.png'"
         :alt="props.media.title"
-        class="h-[350px] w-[480px] object-contain rounded-lg"
+        class="h-[300px] w-full object-cover"
       >
     </NuxtLink>
-    <NuxtLink class="text-center text-sm mt-2">
-      {{ props.media.title }}
-    </NuxtLink>
+    <div>
+      <NuxtLink :to="{ name: 'itemid', params: { type: props.media.media_type, id: props.media.id } }" class="p-2 w-full text-center text-sm truncate">
+        {{ props.media.title ?? props.media.name }}
+      </NuxtLink>
+    </div>
   </div>
 </template>

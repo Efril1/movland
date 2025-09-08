@@ -21,9 +21,12 @@ const { pending } = await useAsyncData('fetchmediabyid', () => {
     <Spinner />
   </div>
   <div v-else class="overflow-auto">
-    <div class="relative w-full h-96 overflow-hidden">
-      <img :src="`https://image.tmdb.org/t/p/original${mediaDetailsStore.selectedMedia.backdrop_path}`" class="w-full h-full object-cover">
-      <div class="absolute inset-0 bg-gradient-to-r from-30% to-44% from-black to-transparent" />
+    <div class="relative w-screen h-145 overflow-hidden">
+      <div class="flex flex-row h-full">
+        <div class="w-[30%] bg-black h-full" />
+        <img :src="`https://image.tmdb.org/t/p/original${mediaDetailsStore.selectedMedia.backdrop_path}`" class="w-full h-full object-fit">
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-r from-black from-30% to-transparent" />
       <div class="absolute inset-0 flex items-center p-8">
         <div>
           <div class="w-4/5 text-white">

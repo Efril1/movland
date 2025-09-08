@@ -6,5 +6,4 @@ export default defineAppConfig({
       neutral: 'stone',
     },
   },
-
 })

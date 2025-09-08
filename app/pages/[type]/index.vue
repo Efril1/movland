@@ -3,7 +3,7 @@ const route = useRoute()
 
 const mediaStore = useMediaStore()
 
-const type = computed(() => {
+const type = computed<MediaType>(() => {
   const param = route.params.type as string
   return param === 'movies' ? 'movie' : 'tv'
 })
@@ -27,11 +27,11 @@ const { data: items, pending } = await useAsyncData(
 
   <div v-else class="overflow-auto p-3">
     <h1 class="text-2xl font-bold mb-5 mt-2 capitalize text-lightpink pl-2">
-      <div v-if="type === 'tv'">
-        tv series
+      <div v-if="type === 'movie'">
+        movies
       </div>
       <div v-else>
-        {{ type }}
+        tv series
       </div>
     </h1>
     <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
@@ -39,7 +39,6 @@ const { data: items, pending } = await useAsyncData(
         v-for="item in items"
         :key="item.id"
         :media="item"
-        :type="type"
       />
     </div>
   </div>

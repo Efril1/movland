@@ -25,7 +25,6 @@ const { pending } = await useAsyncData('fetchmedia', () => {
         v-for="mitem in mediaStore.movies"
         :key="mitem.id"
         :media="mitem"
-        type="movie"
       />
     </div>
 
@@ -39,7 +38,6 @@ const { pending } = await useAsyncData('fetchmedia', () => {
         v-for="titem in mediaStore.tvs"
         :key="titem.id"
         :media="titem"
-        type="tv"
       />
     </div>
   </div>
