@@ -1,6 +1,6 @@
 <template>
   <div class="fixed left-0 top-0 w-screen h-screen flex flex-col overflow-auto">
-    <header class="fixed top-0 left-0 w-full z-10 flex justify-between items-center p-3 bg-darkpurple">
+    <UHeader class="flex top-0 left-0 w-full z-10 justify-between items-center p-3 bg-darkpurple">
       <div class="flex items-center gap-6">
         <ULink
           to="/"
@@ -28,7 +28,7 @@
         to="https://github.com/Efril1"
         variant="ghost"
       />
-    </header>
+    </UHeader>
 
     <main class="min-h-screen flex flex-col items-center">
       <slot />
