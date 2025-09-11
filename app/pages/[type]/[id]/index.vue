@@ -20,7 +20,7 @@ const { pending } = await useAsyncData('fetchmediabyid', () => {
     <Spinner />
   </div>
   <div v-else class="overflow-auto">
-    <div class="relative w-screen h-145 overflow-hidden">
+    <div class="relative w-screen sm:h-[300px] md:h-[400px] lg:h-[580px] overflow-hidden">
       <div class="flex flex-row h-full">
         <div class="w-[40%] bg-black h-full" />
         <img :src="`https://image.tmdb.org/t/p/original${mediaDetailsStore.selectedMedia.backdrop_path}`" class="w-full h-full object-cover">
