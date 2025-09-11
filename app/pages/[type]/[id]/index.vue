@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import MediaDetails from '~/components/mediaDetails.vue'
-import Spinner from '~/components/spinner.vue'
+import StarRating from '~/components/starRating.vue'
 
 definePageMeta({ name: 'itemid' })
 
@@ -34,6 +33,9 @@ const { pending } = await useAsyncData('fetchmediabyid', () => {
               {{ mediaDetailsStore.selectedMedia.title || mediaDetailsStore.selectedMedia.name }}
             </h1>
           </div>
+          <StarRating
+            :rating="(mediaDetailsStore.selectedMedia.vote_average / 2)"
+          />
           <div class="hidden sm:block w-2/5 text-white">
             <p class="text-lg line-clamp-3">
               {{ mediaDetailsStore.selectedMedia.overview }}

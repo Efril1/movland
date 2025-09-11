@@ -20,6 +20,6 @@ const filledPercent = computed(() => {
         </div>
       </div>
     </div>
-    <span>{{ rating.toFixed(1) }}</span>
+    <span class="mb-1 font-bold">{{ rating.toFixed(1) }}</span>
   </div>
 </template>

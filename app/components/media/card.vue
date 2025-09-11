@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import StarRating from '../starRating.vue'
+
 interface Props {
   media: Media
 }
@@ -20,6 +22,9 @@ onMounted(() => {
         class="h-[300px] w-full object-cover"
       >
     </NuxtLink>
+    <StarRating
+      :rating="(props.media.vote_average / 2)"
+    />
     <div>
       <NuxtLink :to="{ name: 'itemid', params: { type: props.media.media_type, id: props.media.id } }" class="p-2 w-full text-center text-sm truncate">
         {{ props.media.title ?? props.media.name }}

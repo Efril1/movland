@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import bgImage from '~/assets/images/blur-bg.png'
-import StarRating from './starRating.vue'
 
 const props = defineProps<{
   media: Media
