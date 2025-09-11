@@ -14,7 +14,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-col items-center bg-transparent rounded-lg overflow-hidden">
+  <div class="flex flex-col items-center bg-transparent overflow-hidden">
     <NuxtLink :to="{ name: 'itemid', params: { type: props.media.media_type, id: props.media.id } }">
       <img
         :src="props.media?.poster_path ? `https://image.tmdb.org/t/p/original${props.media.poster_path}` : '/fallback.png'"
@@ -25,8 +25,11 @@ onMounted(() => {
     <StarRating
       :rating="(props.media.vote_average / 2)"
     />
-    <div>
-      <NuxtLink :to="{ name: 'itemid', params: { type: props.media.media_type, id: props.media.id } }" class="p-2 w-full text-center text-sm truncate">
+    <div class="flex flex-col items-center bg-transparent overflow-hidden w-full max-w-[200px]">
+      <NuxtLink
+        :to="{ name: 'itemid', params: { type: props.media.media_type, id: props.media.id } }"
+        class="p-2 text-center text-sm truncate block max-w-full"
+      >
         {{ props.media.title ?? props.media.name }}
       </NuxtLink>
     </div>

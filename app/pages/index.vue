@@ -14,28 +14,30 @@ const { pending } = await useAsyncData('fetchmedia', () => {
     <Spinner />
   </div>
 
-  <div v-else class="overflow-auto">
-    <h1 class="text-2xl font-bold mb-2 m-5 text-lightpink">
-      Discover Movies
-    </h1>
-    <div
-      class="grid gap-4 overflow-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 p-3"
-    >
+  <div v-else class="overflow-auto p-3">
+    <USeparator>
+      <h1 class="text-2xl font-bold capitalize text-lightpink">
+        Discover Movies
+      </h1>
+    </USeparator>
+
+    <div class="flex flex-wrap gap-4 p-3 justify-center">
       <MediaCard
-        v-for="mitem in mediaStore.movies"
+        v-for="mitem in mediaStore.media.filter(m => m.media_type === 'movie')"
         :key="mitem.id"
         :media="mitem"
       />
     </div>
 
-    <h1 class="text-2xl font-bold mb-2 mt-6 m-5 text-lightpink">
-      Discover Series
-    </h1>
-    <div
-      class="grid gap-4 overflow-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 p-3"
-    >
+    <USeparator>
+      <h1 class="text-2xl font-bold text-lightpink">
+        Discover Series
+      </h1>
+    </USeparator>
+
+    <div class="flex flex-wrap gap-4 p-3 justify-center">
       <MediaCard
-        v-for="titem in mediaStore.tvs"
+        v-for="titem in mediaStore.media.filter(m => m.media_type === 'tv')"
         :key="titem.id"
         :media="titem"
       />

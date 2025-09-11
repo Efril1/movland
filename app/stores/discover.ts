@@ -1,6 +1,5 @@
 export const useMediaStore = defineStore('mediaDiscover', () => {
-  const movies = ref<Media[]>([])
-  const tvs = ref<Media[]>([])
+  const media = ref<Media[]>([])
 
   async function fetchMedia(mediaType: MediaType) {
     const config = useRuntimeConfig()
@@ -16,34 +15,23 @@ export const useMediaStore = defineStore('mediaDiscover', () => {
         media_type: mediaType,
       }))
 
-      if (mediaType === 'movie') {
-        movies.value = normalized
-      }
-      else {
-        tvs.value = normalized
-      }
+      media.value = [
+        ...media.value.filter(m => m.media_type !== mediaType),
+        ...normalized,
+      ]
     }
   }
 
-  function getMovieById(id: string) {
-    const movie = movies.value.find(m => m.id === id)
-    if (!movie)
-      throw new Error(`Movie ${id} not found`)
-    return movie
-  }
-
-  function getTvById(id: string) {
-    const tv = tvs.value.find(t => t.id === id)
-    if (!tv)
-      throw new Error(`TV ${id} not found`)
-    return tv
+  function getMediaById(id: string | number) {
+    const found = media.value.find(m => String(m.id) === String(id))
+    if (!found)
+      throw new Error(`Media ${id} not found`)
+    return found
   }
 
   return {
-    movies,
-    tvs,
+    media,
     fetchMedia,
-    getMovieById,
-    getTvById,
+    getMediaById,
   }
 })

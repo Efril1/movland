@@ -12,7 +12,7 @@ const { data: items, pending } = await useAsyncData(
   `medialist-${type.value}`,
   async () => {
     await mediaStore.fetchMedia(type.value)
-    return type.value === 'movie' ? mediaStore.movies : mediaStore.tvs
+    return mediaStore.media.filter(m => m.media_type === type.value)
   },
   {
     watch: [type],
@@ -26,12 +26,12 @@ const { data: items, pending } = await useAsyncData(
   </div>
 
   <div v-else class="overflow-auto p-3">
-    <h1 class="text-2xl font-bold mb-5 mt-2 capitalize text-lightpink pl-2">
-      <span>
+    <USeparator>
+      <span class="text-2xl font-bold  capitalize text-lightpink pl-2">
         {{ type === 'movie' ? 'movies' : 'tv series' }}
       </span>
-    </h1>
-    <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
+    </USeparator>
+    <div class="flex flex-wrap gap-4 p-3 justify-center">
       <MediaCard
         v-for="item in items"
         :key="item.id"
