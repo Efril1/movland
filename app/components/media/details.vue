@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import bgImage from '~/assets/images/blur-bg.png'
-
 const props = defineProps<{
   media: Media
 }>()
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row gap-11 pt-20 pb-20 px-4 bg-no-repeat bg-center bg-cover" :style="{ backgroundImage: `url(${bgImage})` }">
+  <div class="flex flex-col md:flex-row gap-11 pt-20 pb-20 px-4 bg-no-repeat bg-center bg-cover">
     <div>
       <img
         :src="`https://image.tmdb.org/t/p/original${props.media.poster_path}`"
