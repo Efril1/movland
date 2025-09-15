@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MediaVideoSection } from '#components'
+import { MediaCast, MediaVideoSection } from '#components'
 import StarRating from '~/components/starRating.vue'
 
 definePageMeta({ name: 'itemid' })
@@ -9,11 +9,21 @@ const mediaDetailsStore = useMediaDetailsStore()
 const type = route.params.type as 'movie' | 'tv'
 const id = Number(route.params.id)
 const videosStore = useVideosStore()
+const creditsStore = useCreditsStore()
+
+const tabItems = [{
+  label: 'About',
+  slot: 'about',
+}, {
+  label: 'Video',
+  slot: 'video',
+}]
 
 const { pending } = await useAsyncData('fetchmediabyid', () => {
   return Promise.all([
     mediaDetailsStore.fetchMediaById(id, type),
     videosStore.fetchMediaById(id, type),
+    creditsStore.fetchMediaById(id, type),
   ])
 })
 
@@ -60,11 +70,46 @@ if (!trailer) {
         </div>
       </div>
     </div>
-    <MediaDetails
-      :media="mediaDetailsStore.selectedMedia"
-    />
-    <MediaVideoSection
-      :trailer="trailer"
-    />
+
+    <div class="flex flex-row">
+      <div class="w-9/10">
+        <UTabs :items="tabItems" variant="link" :ui="{ trigger: 'grow' }" class="w-4/5 gap-4 mx-auto">
+          <template #about>
+            <MediaDetails
+              :media="mediaDetailsStore.selectedMedia"
+            />
+          </template>
+          <template #video>
+            <MediaVideoSection
+              :trailer="trailer"
+            />
+          </template>
+        </UTabs>
+      </div>
+      <div class="flex flex-col mt-20 mx-auto space-y-3">
+        <UButton
+          icon="lucide-instagram"
+          label=""
+          color="neutral"
+          variant="ghost"
+          class="max-w-full"
+        />
+        <UButton
+          icon="lucide-facebook"
+          label=""
+          color="neutral"
+          variant="ghost"
+          class="max-w-full"
+        />
+        <UButton
+          icon="mingcute:social-x-line"
+          label=""
+          color="neutral"
+          variant="ghost"
+          class="max-w-full"
+        />
+      </div>
+    </div>
+    <MediaCast :credits="creditsStore.selectedMedia" />
   </div>
 </template>

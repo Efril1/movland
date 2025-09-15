@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import StarRating from '../starRating.vue'
-
 interface Props {
   media: Media
 }
