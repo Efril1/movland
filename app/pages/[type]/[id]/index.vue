@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MediaCast, MediaSocials, MediaVideoSection } from '#components'
+import { MediaCast, MediaKeywords, MediaSocials, MediaVideoSection } from '#components'
 import StarRating from '~/components/starRating.vue'
 
 definePageMeta({ name: 'itemid' })
@@ -11,6 +11,7 @@ const id = Number(route.params.id)
 const videosStore = useVideosStore()
 const creditsStore = useCreditsStore()
 const externalIdsStore = useExternalIdsStore()
+const keywordsStore = useKeywordsStore()
 
 const tabItems = [{
   label: 'About',
@@ -26,6 +27,7 @@ const { pending } = await useAsyncData('fetchmediabyid', () => {
     videosStore.fetchMediaById(id, type),
     creditsStore.fetchMediaById(id, type),
     externalIdsStore.fetchMediaById(id, type),
+    keywordsStore.fetchMediaById(id, type),
   ])
 })
 
@@ -89,11 +91,29 @@ if (!trailer) {
         </UTabs>
       </div>
       <div class="hidden md:flex md:flex-col md:mt-20 md:mx-auto md:space-y-5">
-        <MediaSocials :externalids="externalIdsStore.selectedMedia" :media="mediaDetailsStore.selectedMedia" />
+        <div>
+          <MediaSocials
+            :externalids="externalIdsStore.selectedMedia"
+            :media="mediaDetailsStore.selectedMedia"
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <span class="font-semibold">Keywords:</span>
+          <MediaKeywords :keywords="keywordsStore.selectedMedia" />
+        </div>
       </div>
     </div>
-    <MediaCast :credits="creditsStore.selectedMedia" />
-    <div class="lg:hidden flex w-full justify-center gap-4">
+    <div class="md:hidden relative flex-col space-y-5">
+      <div class="flex flex-row gap-2 overflow-x-auto no-scrollbar pr-10">
+        <MediaKeywords :keywords="keywordsStore.selectedMedia" />
+      </div>
+    </div>
+
+    <div class="flex flex-row gap-2 overflow-x-auto no-scrollbar pr-10">
+      <MediaCast :credits="creditsStore.selectedMedia" />
+    </div>
+
+    <div class="md:hidden flex w-full justify-center gap-4">
       <MediaSocials :externalids="externalIdsStore.selectedMedia" :media="mediaDetailsStore.selectedMedia" />
     </div>
   </div>

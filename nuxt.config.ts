@@ -7,6 +7,24 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@pinia/nuxt', '@nuxt/ui'],
   css: ['~/assets/css/main.css'],
+  ui: {
+    theme: {
+      colors: [
+        'primary',
+        'secondary',
+        'green',
+        'blue',
+        'pink',
+        'info',
+        'success',
+        'warning',
+        'error',
+        'stone',
+        'gray',
+        'zinc',
+      ],
+    },
+  },
 
   vite: {
     plugins: [

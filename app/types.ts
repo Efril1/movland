@@ -128,5 +128,12 @@ declare global {
   export interface Credits {
     cast: Media[]
   }
-
+  export interface Keyword {
+    id: number
+    name: string
+  }
+  export interface Keywords {
+    id: number
+    keywords: Keyword[]
+  }
 }
