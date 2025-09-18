@@ -1,5 +1,5 @@
 <template>
-  <UHeader class="flex top-0 left-0 w-full z-10 justify-between items-center p-3 bg-darkpurple/70 backdrop-blur-md">
+  <UHeader class="flex top-0 left-0 w-full justify-between items-center p-3 bg-darkpurple/70 backdrop-blur-md">
     <template #title>
       <ULink
         to="/"
