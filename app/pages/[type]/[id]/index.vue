@@ -26,7 +26,6 @@ const { pending } = await useAsyncData('fetchmediabyid', () => {
     videosStore.fetchMediaById(id, type),
     creditsStore.fetchMediaById(id, type),
     externalIdsStore.fetchMediaById(id, type),
-
   ])
 })
 
@@ -75,7 +74,7 @@ if (!trailer) {
     </div>
 
     <div class="flex sm:flex-row">
-      <div class="sm:w-9/10">
+      <div class="md:w-9/10">
         <UTabs :items="tabItems" variant="link" :ui="{ trigger: 'grow' }" class="w-4/5 gap-4 mx-auto">
           <template #about>
             <MediaDetails
@@ -89,12 +88,12 @@ if (!trailer) {
           </template>
         </UTabs>
       </div>
-      <div class="hidden sm:flex sm:flex-col sm:mt-20 sm:mx-auto sm:space-y-3">
+      <div class="hidden md:flex md:flex-col md:mt-20 md:mx-auto md:space-y-5">
         <MediaSocials :externalids="externalIdsStore.selectedMedia" :media="mediaDetailsStore.selectedMedia" />
       </div>
     </div>
     <MediaCast :credits="creditsStore.selectedMedia" />
-    <div class="flex w-full justify-center gap-4">
+    <div class="lg:hidden flex w-full justify-center gap-4">
       <MediaSocials :externalids="externalIdsStore.selectedMedia" :media="mediaDetailsStore.selectedMedia" />
     </div>
   </div>
