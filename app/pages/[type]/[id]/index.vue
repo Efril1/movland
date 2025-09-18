@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MediaCast, MediaVideoSection } from '#components'
+import { MediaCast, MediaSocials, MediaVideoSection } from '#components'
 import StarRating from '~/components/starRating.vue'
 
 definePageMeta({ name: 'itemid' })
@@ -10,6 +10,7 @@ const type = route.params.type as 'movie' | 'tv'
 const id = Number(route.params.id)
 const videosStore = useVideosStore()
 const creditsStore = useCreditsStore()
+const externalIdsStore = useExternalIdsStore()
 
 const tabItems = [{
   label: 'About',
@@ -24,6 +25,8 @@ const { pending } = await useAsyncData('fetchmediabyid', () => {
     mediaDetailsStore.fetchMediaById(id, type),
     videosStore.fetchMediaById(id, type),
     creditsStore.fetchMediaById(id, type),
+    externalIdsStore.fetchMediaById(id, type),
+
   ])
 })
 
@@ -87,27 +90,7 @@ if (!trailer) {
         </UTabs>
       </div>
       <div class="flex flex-col mt-20 mx-auto space-y-3">
-        <UButton
-          icon="lucide-instagram"
-          label=""
-          color="neutral"
-          variant="ghost"
-          class="max-w-full"
-        />
-        <UButton
-          icon="lucide-facebook"
-          label=""
-          color="neutral"
-          variant="ghost"
-          class="max-w-full"
-        />
-        <UButton
-          icon="mingcute:social-x-line"
-          label=""
-          color="neutral"
-          variant="ghost"
-          class="max-w-full"
-        />
+        <MediaSocials :externalids="externalIdsStore.selectedMedia" :media="mediaDetailsStore.selectedMedia" />
       </div>
     </div>
     <MediaCast :credits="creditsStore.selectedMedia" />
