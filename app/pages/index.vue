@@ -21,7 +21,14 @@ const { pending } = await useAsyncData('fetchmedia', () => {
       </h1>
     </USeparator>
 
-    <div class="flex flex-wrap gap-4 p-3 justify-center">
+    <div
+      class="grid gap-4 p-3 justify-center
+            grid-cols-2
+            sm:grid-cols-3
+            md:grid-cols-4
+            lg:grid-cols-5
+            xl:grid-cols-6"
+    >
       <MediaCard
         v-for="mitem in mediaStore.media.filter(m => m.media_type === 'movie')"
         :key="mitem.id"
@@ -35,7 +42,14 @@ const { pending } = await useAsyncData('fetchmedia', () => {
       </h1>
     </USeparator>
 
-    <div class="flex flex-wrap gap-4 p-3 justify-center">
+    <div
+      class="grid gap-4 p-3 justify-center
+            grid-cols-2
+            sm:grid-cols-3
+            md:grid-cols-4
+            lg:grid-cols-5
+            xl:grid-cols-6"
+    >
       <MediaCard
         v-for="titem in mediaStore.media.filter(m => m.media_type === 'tv')"
         :key="titem.id"

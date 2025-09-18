@@ -31,7 +31,14 @@ const { data: items, pending } = await useAsyncData(
         {{ type === 'movie' ? 'movies' : 'tv series' }}
       </span>
     </USeparator>
-    <div class="flex flex-wrap gap-4 p-3 justify-center">
+    <div
+      class="grid gap-4 p-3 justify-center
+            grid-cols-2
+            sm:grid-cols-3
+            md:grid-cols-4
+            lg:grid-cols-5
+            xl:grid-cols-6"
+    >
       <MediaCard
         v-for="item in items"
         :key="item.id"

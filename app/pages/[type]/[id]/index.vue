@@ -74,8 +74,8 @@ if (!trailer) {
       </div>
     </div>
 
-    <div class="flex flex-row">
-      <div class="w-9/10">
+    <div class="flex sm:flex-row">
+      <div class="sm:w-9/10">
         <UTabs :items="tabItems" variant="link" :ui="{ trigger: 'grow' }" class="w-4/5 gap-4 mx-auto">
           <template #about>
             <MediaDetails
@@ -89,10 +89,13 @@ if (!trailer) {
           </template>
         </UTabs>
       </div>
-      <div class="flex flex-col mt-20 mx-auto space-y-3">
+      <div class="hidden sm:flex sm:flex-col sm:mt-20 sm:mx-auto sm:space-y-3">
         <MediaSocials :externalids="externalIdsStore.selectedMedia" :media="mediaDetailsStore.selectedMedia" />
       </div>
     </div>
     <MediaCast :credits="creditsStore.selectedMedia" />
+    <div class="flex w-full justify-center gap-4">
+      <MediaSocials :externalids="externalIdsStore.selectedMedia" :media="mediaDetailsStore.selectedMedia" />
+    </div>
   </div>
 </template>

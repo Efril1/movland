@@ -19,9 +19,6 @@ const props = defineProps<{
       </h1>
 
       <div>
-        <p class="font-bold">
-          Overview:
-        </p>
         <p>{{ props.media.overview }}</p>
       </div>
 
