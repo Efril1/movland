@@ -136,4 +136,8 @@ declare global {
     id: number
     keywords: Keyword[]
   }
+  interface NormalizedKeywords {
+    id: number
+    keywords: Keyword[]
+  }
 }
