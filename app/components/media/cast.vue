@@ -1,16 +1,14 @@
 <script setup lang="ts">
-interface Props {
-  credits: Media
-}
-
-const props = defineProps<Props>()
+defineProps<{
+  media: Media
+}>()
 </script>
 
 <template>
   <div class="px-4 py-8 max-w-7xl mx-auto">
     <div class="flex overflow-x-auto gap-4 pb-4">
       <div
-        v-for="person in credits.cast"
+        v-for="person in media.credits?.cast"
         :key="person.id"
         class="flex-shrink-0 w-40 p-2"
       >

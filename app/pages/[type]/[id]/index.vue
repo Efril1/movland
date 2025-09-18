@@ -109,8 +109,8 @@ if (!trailer) {
       </div>
     </div>
 
-    <div class="flex flex-row gap-2 overflow-x-auto no-scrollbar pr-10">
-      <MediaCast :credits="creditsStore.selectedMedia" />
+    <div v-if="creditsStore.selectedMedia" class="flex flex-row gap-2 overflow-x-auto no-scrollbar pr-10">
+      <MediaCast :media="creditsStore.selectedMedia" />
     </div>
 
     <div class="md:hidden flex w-full justify-center gap-4">

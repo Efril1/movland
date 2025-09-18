@@ -1,5 +1,5 @@
 export const useCreditsStore = defineStore('credits', () => {
-  const selectedMedia = ref<any>(null)
+  const selectedMedia = ref<Media>()
   const config = useRuntimeConfig()
   const apiKey = config.public.TMDB_API_KEY
 
@@ -10,7 +10,7 @@ export const useCreditsStore = defineStore('credits', () => {
 
     if (!data.value)
       throw new Error(`Media ${id} not found`)
-    selectedMedia.value = data.value
+    selectedMedia.value = data.value as Media | undefined ?? undefined
   }
 
   return {
