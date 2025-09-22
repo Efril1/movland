@@ -103,7 +103,7 @@ if (!trailer) {
       </div>
     </div>
 
-    <UTabs :items="tabItems" variant="link" :ui="{ trigger: 'grow' }" class="w-4/5 gap-4 mx-auto">
+    <UTabs :items="tabItems" variant="link" :ui="{ trigger: 'grow' }" class="w-4/5 gap-4 mx-auto pt-8">
       <template #video>
         <MediaVideoSection
           :trailer="trailer"
@@ -118,7 +118,7 @@ if (!trailer) {
       <span class="font-bold ">Cast</span>
     </div>
 
-    <div v-if="creditsStore.selectedMedia" class="flex flex-col gap-2 overflow-x-auto no-scrollbar pr-10 pt-8">
+    <div v-if="creditsStore.selectedMedia" class="flex flex-col gap-2 overflow-x-auto no-scrollbar pr-10">
       <MediaCast :media="creditsStore.selectedMedia" />
     </div>
 
