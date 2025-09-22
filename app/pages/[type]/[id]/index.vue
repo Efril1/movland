@@ -110,9 +110,7 @@ if (!trailer) {
         />
       </template>
       <template #poster>
-        <MediaDetails
-          :media="mediaDetailsStore.selectedMedia"
-        />
+        <img :src="`https://image.tmdb.org/t/p/original${mediaDetailsStore.selectedMedia.poster_path}`" class="w-100 h-150 mx-auto">
       </template>
     </UTabs>
 
