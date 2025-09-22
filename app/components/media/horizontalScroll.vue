@@ -5,18 +5,28 @@ const props = defineProps<{
   id: string
 }>()
 
-const scrollAmount = 176
+const CARD_GAP = 16
 
 function scrollLeft() {
   const el = document.getElementById(props.id)
-  if (el)
-    el.scrollBy({ left: -scrollAmount, behavior: 'smooth' })
+  if (el) {
+    const card = el.querySelector('.flex-shrink-0') as HTMLElement
+    if (card) {
+      const cardWidth = card.clientWidth + CARD_GAP
+      el.scrollBy({ left: -cardWidth, behavior: 'smooth' })
+    }
+  }
 }
 
 function scrollRight() {
   const el = document.getElementById(props.id)
-  if (el)
-    el.scrollBy({ left: scrollAmount, behavior: 'smooth' })
+  if (el) {
+    const card = el.querySelector('.flex-shrink-0') as HTMLElement
+    if (card) {
+      const cardWidth = card.clientWidth + CARD_GAP
+      el.scrollBy({ left: cardWidth, behavior: 'smooth' })
+    }
+  }
 }
 </script>
 
