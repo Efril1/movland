@@ -1,5 +1,30 @@
+<script setup lang="ts">
+interface NavigationMenuItem {
+  label: string
+  to: string
+  active?: boolean
+}
+
+const route = useRoute()
+
+const items = computed<NavigationMenuItem[]>(() => [
+  {
+    label: 'Movies',
+    to: '/movies',
+    active: route.path.startsWith('/movies'),
+  },
+  {
+    label: 'Series',
+    to: '/series',
+    active: route.path.startsWith('/series'),
+  },
+])
+</script>
+
 <template>
-  <UHeader class="flex top-0 left-0 w-full justify-between items-center p-3 bg-darkpurple/70 backdrop-blur-md">
+  <UHeader
+    class="flex top-0 left-0 w-full bg-darkpurple/70 backdrop-blur-md"
+  >
     <template #title>
       <ULink
         to="/"
@@ -8,20 +33,27 @@
         MOVLAND
       </ULink>
     </template>
-    <div class="flex items-center gap-6">
-      <ULink
-        to="/movies"
-        class="text-lg hover:text-primary"
-      >
-        Movies
-      </ULink>
-      <ULink
-        to="/series"
-        class="text-lg hover:text-primary"
-      >
-        Series
-      </ULink>
-    </div>
+
+    <UNavigationMenu :items="items" class="hidden md:flex">
+      <template #item="{ item }">
+        <ULink
+          :to="item.to"
+          class="w-full h-full text-lg px-3 hover:text-primary"
+          :class="{ 'text-primary font-semibold': item.active }"
+        >
+          {{ item.label }}
+        </ULink>
+      </template>
+    </UNavigationMenu>
+
+    <template #body>
+      <UNavigationMenu
+        :items="items"
+        orientation="vertical"
+        class="-mx-2.5 lg:hidden"
+      />
+    </template>
+
     <template #right>
       <UButton
         icon="i-lucide-github"

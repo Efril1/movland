@@ -14,11 +14,11 @@ const externalIdsStore = useExternalIdsStore()
 const keywordsStore = useKeywordsStore()
 
 const tabItems = [{
-  label: 'About',
-  slot: 'about',
-}, {
   label: 'Video',
   slot: 'video',
+}, {
+  label: 'Poster',
+  slot: 'poster',
 }]
 
 const { pending } = await useAsyncData('fetchmediabyid', () => {
@@ -49,15 +49,15 @@ if (!trailer) {
   <div v-if="pending" class="text-center font-bold">
     <Spinner />
   </div>
-  <div v-else class="overflow-y-auto overflow-x-hidden">
-    <div class="hidden sm:block relative w-screen sm:h-[300px] md:h-[400px] lg:h-[580px] overflow-hidden">
+  <div v-else class=" overflow-x-hidden">
+    <div class="hidden sm:block absolute left-0 right-0 w-screen sm:h-[300px] md:h-[400px] lg:h-[580px] overflow-hidden">
       <div class="flex flex-row h-full">
         <div class="w-[40%] bg-black h-full" />
         <img :src="`https://image.tmdb.org/t/p/original${mediaDetailsStore.selectedMedia.backdrop_path}`" class="w-full h-full object-cover">
       </div>
       <div class="absolute inset-0 bg-gradient-to-r from-black from-40% to-transparent" />
       <div class="absolute inset-0 flex items-center p-8">
-        <div class="w-full">
+        <div class="w-full max-w-7xl flex-grow  px-3 sm:px-0 md:px-0 lg:px-1">
           <div class=" text-white">
             <h1 class="text-5xl font-bold mb-4">
               {{ mediaDetailsStore.selectedMedia.title || mediaDetailsStore.selectedMedia.name }}
@@ -75,22 +75,16 @@ if (!trailer) {
       </div>
     </div>
 
-    <div class="flex sm:flex-row">
+    <div class="flex sm:flex-row sm:pt-[300px] md:pt-[400px] lg:pt-[580px]">
       <div class="md:w-9/10">
-        <UTabs :items="tabItems" variant="link" :ui="{ trigger: 'grow' }" class="w-4/5 gap-4 mx-auto">
-          <template #about>
-            <MediaDetails
-              :media="mediaDetailsStore.selectedMedia"
-            />
-          </template>
-          <template #video>
-            <MediaVideoSection
-              :trailer="trailer"
-            />
-          </template>
-        </UTabs>
+        <MediaDetails
+          :media="mediaDetailsStore.selectedMedia"
+        />
       </div>
+
       <div class="hidden md:flex md:flex-col md:mt-20 md:mx-auto md:space-y-5">
+        <span class="font-bold ">Socials:</span>
+
         <div>
           <MediaSocials
             :externalids="externalIdsStore.selectedMedia"
@@ -109,10 +103,30 @@ if (!trailer) {
       </div>
     </div>
 
-    <div v-if="creditsStore.selectedMedia" class="flex flex-row gap-2 overflow-x-auto no-scrollbar pr-10">
+    <UTabs :items="tabItems" variant="link" :ui="{ trigger: 'grow' }" class="w-4/5 gap-4 mx-auto">
+      <template #video>
+        <MediaVideoSection
+          :trailer="trailer"
+        />
+      </template>
+      <template #poster>
+        <MediaDetails
+          :media="mediaDetailsStore.selectedMedia"
+        />
+      </template>
+    </UTabs>
+
+    <div v-if="creditsStore.selectedMedia" class="flex justify-center items-center mx-auto pt-8">
+      <span class="font-bold ">Cast</span>
+    </div>
+
+    <div v-if="creditsStore.selectedMedia" class="flex flex-col gap-2 overflow-x-auto no-scrollbar pr-10 pt-8">
       <MediaCast :media="creditsStore.selectedMedia" />
     </div>
 
+    <div class="md:hidden flex justify-center items-center mx-auto pt-6 pb-6">
+      <span class="font-bold ">Socials</span>
+    </div>
     <div class="md:hidden flex w-full justify-center gap-4">
       <MediaSocials :externalids="externalIdsStore.selectedMedia" :media="mediaDetailsStore.selectedMedia" />
     </div>

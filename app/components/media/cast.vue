@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   media: Media
 }>()
 </script>
@@ -8,7 +8,7 @@ defineProps<{
   <div class="px-4 py-8 max-w-7xl mx-auto">
     <div class="flex overflow-x-auto gap-4 pb-4">
       <div
-        v-for="person in media.credits?.cast"
+        v-for="person in media.cast"
         :key="person.id"
         class="flex-shrink-0 w-40 p-2"
       >
