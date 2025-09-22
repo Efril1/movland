@@ -14,47 +14,17 @@ const { pending } = await useAsyncData('fetchmedia', () => {
     <Spinner />
   </div>
 
-  <div v-else class="overflow-auto">
-    <USeparator class="mb-5 mt-5">
-      <h1 class="text-2xl font-bold capitalize text-lightpink">
-        Discover Movies
-      </h1>
-    </USeparator>
+  <div v-else>
+    <MediaHorizontalScroll
+      id="movies"
+      title="Trending Movies"
+      :media="mediaStore.media.filter(m => m.media_type === 'movie')"
+    />
 
-    <div
-      class="grid gap-4 justify-center
-            grid-cols-2
-            sm:grid-cols-3
-            md:grid-cols-4
-            lg:grid-cols-5
-            xl:grid-cols-6"
-    >
-      <MediaCard
-        v-for="mitem in mediaStore.media.filter(m => m.media_type === 'movie')"
-        :key="mitem.id"
-        :media="mitem"
-      />
-    </div>
-
-    <USeparator class="mb-5 mt-5">
-      <h1 class="text-2xl font-bold text-lightpink">
-        Discover Series
-      </h1>
-    </USeparator>
-
-    <div
-      class="grid gap-4 justify-center
-            grid-cols-2
-            sm:grid-cols-3
-            md:grid-cols-4
-            lg:grid-cols-5
-            xl:grid-cols-6"
-    >
-      <MediaCard
-        v-for="titem in mediaStore.media.filter(m => m.media_type === 'tv')"
-        :key="titem.id"
-        :media="titem"
-      />
-    </div>
+    <MediaHorizontalScroll
+      id="series"
+      title="Trending Series"
+      :media="mediaStore.media.filter(m => m.media_type === 'tv')"
+    />
   </div>
 </template>
